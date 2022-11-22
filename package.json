@@ -1,0 +1,51 @@
+{
+    "name": "@kjts20/tool-react-h5",
+    "version": "0.0.1",
+    "description": "wkj",
+    "miniprogram": "dist",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kjts20/tool-react-h5.git"
+    },
+    "scripts": {
+        "build:ts": "tsup",
+        "dev": "tsup --watch",
+        "build": "npm run build:ts",
+        "prepublishOnly": "npm run build",
+        "pub": "npm version patch && npm publish"
+    },
+    "keywords": [
+        "sskj",
+        "工具包",
+        "react",
+        "react基础配置"
+    ],
+    "author": "wkj",
+    "license": "Apache",
+    "devDependencies": {
+        "tsup": "^6.4.0",
+        "typescript": "^4.8.4"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 160,
+        "eslintIntegration": true,
+        "stylelintIntegration": true,
+        "singleQuote": true,
+        "semi": true,
+        "insertPragma": false,
+        "trailingComma": "none",
+        "arrowParens": "avoid"
+    },
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "@alifd/next": "^1.26.8",
+        "@kjts20/tool": "^0.0.39",
+        "axios": "^1.1.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    }
+}
