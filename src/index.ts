@@ -4,6 +4,7 @@ export * from './refsManager';
 // 请求相关
 export * from './axios2httpServer';
 export * from './httpServer';
+export * from './antd-upload';
 
 // 缓存相关
 export * from './localStorage';
