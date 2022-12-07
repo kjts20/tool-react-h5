@@ -58,3 +58,21 @@ export const confirm = function (msg: React.ReactNode, okText = '确定', cancel
         });
     });
 };
+
+// alert
+export const alert = function (msg: React.ReactNode, okText = '知道了') {
+    return new Promise(resolve => {
+        const closeDialog = function (cb) {
+            dialog?.hide();
+            cb?.();
+        };
+        const dialog = Dialog.alert({
+            content: msg,
+            footer: [
+                <Button type="primary" onClick={() => closeDialog(resolve)}>
+                    {okText || '知道了'}
+                </Button>
+            ]
+        });
+    });
+};
