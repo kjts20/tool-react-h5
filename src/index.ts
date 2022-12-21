@@ -13,3 +13,6 @@ export * from './sessionStorage';
 // 提示与过滤
 export * from './platform';
 export * from './resFilter';
+
+// 浏览器相关
+export * from './browserUtils';
