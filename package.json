@@ -43,7 +43,7 @@
     ],
     "dependencies": {
         "@alifd/next": "^1.26.8",
-        "@kjts20/tool": "^0.0.63",
+        "@kjts20/tool": "^0.0.65",
         "antd": "^5.0.1",
         "axios": "^1.1.3",
         "file-saver": "^2.0.5",
