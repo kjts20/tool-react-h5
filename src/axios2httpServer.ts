@@ -5,6 +5,25 @@
 import { IHttpServerOptons, isObj } from '@kjts20/tool';
 import Axios from 'axios';
 
+/**
+ * 是否post表单请求
+ * @param header 头部
+ * @returns
+ */
+const isPostFormRequest = function (header) {
+    const postContentTypeTag = 'x-www-form-urlencoded'.toUpperCase();
+    for (const key in header || {}) {
+        const uKey = key.toUpperCase();
+        if (uKey === 'CONTENT-TYPE' || uKey === 'CONTENTTYPE') {
+            const val = header[key];
+            if ((val + '').toUpperCase().includes(postContentTypeTag)) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 export const axios2HttpServer: {
     request: IHttpServerOptons['request'];
     uploadFile: IHttpServerOptons['uploadFile'];
@@ -12,9 +31,18 @@ export const axios2HttpServer: {
     // 请求类
     request(options) {
         const { url, data, header, timeout, method, success, error, complete } = options;
+        let requestParams = data;
+        // 对post进行处理（axios只是支持url方式）
+        if ((method + '').toUpperCase() === 'POST' && isPostFormRequest(header)) {
+            let params = new URLSearchParams();
+            for (const key in data || []) {
+                params.append(key, data[key]);
+            }
+            requestParams = params;
+        }
         Axios.request({
             url,
-            data,
+            data: requestParams,
             headers: header,
             timeout,
             method
