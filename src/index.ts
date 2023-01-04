@@ -16,3 +16,7 @@ export * from './resFilter';
 
 // 浏览器相关
 export * from './browserUtils';
+
+// 工具部分
+export * from './utils/string.const';
+export * from './utils/style.utils';
