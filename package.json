@@ -24,12 +24,12 @@
     "author": "wkj",
     "license": "Apache",
     "devDependencies": {
-        "tsup": "^6.4.0",
-        "typescript": "^4.8.4",
         "@kjts20/tool": "^0.0.65",
         "antd": "^5.0.1",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "tsup": "^6.4.0",
+        "typescript": "^4.8.4"
     },
     "prettier": {
         "tabWidth": 4,
@@ -48,7 +48,6 @@
     "dependencies": {
         "axios": "^1.1.3",
         "file-saver": "^2.0.5",
-        "jszip": "^3.10.1",
-        "@alifd/next": "^1.26.8"
+        "jszip": "^3.10.1"
     }
 }

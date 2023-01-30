@@ -1,11 +1,11 @@
-import { message, Modal, Button } from 'antd';
+import { message as Message, Modal as Dialog, Button } from 'antd';
 import React from 'react';
 import { isNum } from '@kjts20/tool';
 
 // 成功
 export const success = function (msg: React.ReactNode, closeTime = 1500) {
     return new Promise(resolve => {
-        message.success({
+        Message.success({
             content: msg,
             duration: isNum(closeTime) ? closeTime : 1500,
             afterClose() {
@@ -19,7 +19,7 @@ export const success = function (msg: React.ReactNode, closeTime = 1500) {
 export const error = function (msg: React.ReactNode, err?) {
     console.warn('err=>', err);
     return new Promise(resolve => {
-        message.error({
+        Message.error({
             content: msg,
             afterClose() {
                 resolve(true);
@@ -31,7 +31,7 @@ export const error = function (msg: React.ReactNode, err?) {
 // 提示
 export const tip = function (msg: React.ReactNode) {
     return new Promise(resolve => {
-        message.warning({
+        Message.warning({
             content: msg,
             afterClose() {
                 resolve(true);
@@ -47,7 +47,7 @@ export const confirm = function (msg: React.ReactNode, okText = '确定', cancel
             dialog?.hide();
             cb?.();
         };
-        const dialog = Modal.confirm({
+        const dialog = Dialog.confirm({
             content: msg,
             footer: [
                 <Button type="primary" onClick={() => closeDialog(resolve)} style={{ marginRight: 10 }}>
@@ -66,7 +66,7 @@ export const alert = function (msg: React.ReactNode, okText = '知道了') {
             dialog?.hide();
             cb?.();
         };
-        const dialog = Modal.alert({
+        const dialog = Dialog.alert({
             content: msg,
             footer: [
                 <Button type="primary" onClick={() => closeDialog(resolve)}>
