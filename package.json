@@ -24,7 +24,7 @@
     "author": "wkj",
     "license": "Apache",
     "devDependencies": {
-        "antd": "^4.24.4",
+        "antd": "^4.24.8",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tsup": "^6.4.0",
