@@ -5,7 +5,7 @@
  */
 import { QueueManager } from '@kjts20/tool';
 import { UploadRequestOption as RcCustomRequestOptions, UploadRequestError } from 'rc-upload/lib/interface';
-import { httpServer } from './httpServer';
+import { httpServer } from './request';
 const api = {
     commonUploadImg: '/common/file/img/upload',
     commonUploadFile: '/common/file/file/upload'

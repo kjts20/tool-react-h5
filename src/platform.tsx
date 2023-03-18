@@ -1,13 +1,38 @@
-import { message, Modal, Button } from 'antd';
-import React from 'react';
+import { message, Modal, Button, ModalFuncProps } from 'antd';
+import React, { ReactNode } from 'react';
 import { isNum } from '@kjts20/tool';
+
+/**
+ * 简单确认框
+ * @param content 消息体
+ * @param config 其他配置
+ * @returns
+ */
+export const simpleConfirm = function (content: ReactNode, config?: ModalFuncProps) {
+    return new Promise((resolve, reject) => {
+        const confirmConfig = config || {};
+        const { onOk, onCancel } = confirmConfig;
+        Modal.confirm({
+            content,
+            ...confirmConfig,
+            onOk: (...args) => {
+                onOk && onOk(...args);
+                resolve(true);
+            },
+            onCancel: (...args) => {
+                onCancel && onCancel(...args);
+                reject();
+            }
+        });
+    });
+};
 
 // 成功
 export const success = function (msg: React.ReactNode, closeTime = 1500) {
     return new Promise(resolve => {
         message.success({
             content: msg,
-            duration: isNum(closeTime) ? closeTime : 1500,
+            duration: (isNum(closeTime) ? closeTime : 1500) / 1000,
             afterClose() {
                 resolve(true);
             }
@@ -43,18 +68,16 @@ export const tip = function (msg: React.ReactNode) {
 // confirm
 export const confirm = function (msg: React.ReactNode, okText = '确定', cancelText = '取消') {
     return new Promise((resolve, reject) => {
-        const closeDialog = function (cb) {
-            dialog?.hide();
-            cb?.();
-        };
-        const dialog = Modal.confirm({
+        Modal.confirm({
             content: msg,
-            footer: [
-                <Button type="primary" onClick={() => closeDialog(resolve)} style={{ marginRight: 10 }}>
-                    {okText || '确定'}
-                </Button>,
-                <Button onClick={() => closeDialog(reject)}>{cancelText || '取消'}</Button>
-            ]
+            okText,
+            cancelText,
+            onOk() {
+                resolve(true);
+            },
+            onCancel() {
+                reject();
+            }
         });
     });
 };
@@ -62,17 +85,23 @@ export const confirm = function (msg: React.ReactNode, okText = '确定', cancel
 // alert
 export const alert = function (msg: React.ReactNode, okText = '知道了') {
     return new Promise(resolve => {
-        const closeDialog = function (cb) {
-            dialog?.hide();
-            cb?.();
-        };
-        const dialog = Modal.alert({
+        Modal.info({
             content: msg,
-            footer: [
-                <Button type="primary" onClick={() => closeDialog(resolve)}>
-                    {okText || '知道了'}
-                </Button>
-            ]
+            okText,
+            onOk() {
+                resolve(true);
+            }
         });
+    });
+};
+
+// loading
+export const loading = function (closeTime = 5000, msg?: React.ReactNode, callback?: Function) {
+    return message.loading({
+        content: msg || '提交中',
+        duration: (isNum(closeTime) ? closeTime : 0) / 1000,
+        afterClose() {
+            callback?.();
+        }
     });
 };
