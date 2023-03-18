@@ -1,4 +1,4 @@
-import { message, Modal, Button, ModalFuncProps } from 'antd';
+import { message, Modal, ModalFuncProps } from 'antd';
 import React, { ReactNode } from 'react';
 import { isNum } from '@kjts20/tool';
 

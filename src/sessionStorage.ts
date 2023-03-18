@@ -1,4 +1,4 @@
-import { CommonStorage, ISetStorageOptions, IGetStorageOptions, IRemoveStorageOptions, IClearStorageOptions } from '@kjts20/tool';
+import { CommonStorage, ISetStorageOptions, IGetStorageOptions, IRemoveStorageOptions, IClearStorageOptions, IStorageApi } from '@kjts20/tool';
 
 // 保存json的key
 const saveJsonKey = function (key: number | string) {
@@ -32,8 +32,10 @@ const getSessionStoragee = function (key) {
     }
 };
 
-// 导出默认缓存
-export const storage = new CommonStorage({
+/**
+ * sessionStorage实现CommonStorage
+ */
+export const sessionStorageImplCommonStorage: IStorageApi = {
     setStorage(options: ISetStorageOptions) {
         const { key, data, success, fail } = options;
         const err = setSessionStorage(key, data);
@@ -111,4 +113,7 @@ export const storage = new CommonStorage({
             return false;
         }
     }
-});
+};
+
+// 导出默认缓存
+export const storage = new CommonStorage(sessionStorageImplCommonStorage);
