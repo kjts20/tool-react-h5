@@ -2,7 +2,7 @@
  * 使用axios转换为httpServer格式
  * 1、系统统一使用httpServer
  */
-import { IHttpServerOptons, isObj } from '@kjts20/tool';
+import { IHttpServerOptions, isObj } from '@kjts20/tool';
 import Axios from 'axios';
 
 /**
@@ -25,8 +25,8 @@ const isPostFormRequest = function (header) {
 };
 
 export const axios2HttpServer: {
-    request: IHttpServerOptons['request'];
-    uploadFile: IHttpServerOptons['uploadFile'];
+    request: IHttpServerOptions['request'];
+    uploadFile: IHttpServerOptions['uploadFile'];
 } = {
     // 请求类
     request(options) {
