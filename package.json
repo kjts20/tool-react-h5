@@ -1,6 +1,6 @@
 {
     "name": "@kjts20/tool-react-h5",
-    "version": "0.0.19",
+    "version": "0.0.18",
     "description": "wkj",
     "miniprogram": "dist",
     "main": "dist/index.js",
@@ -24,11 +24,12 @@
     "author": "wkj",
     "license": "Apache",
     "devDependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
+        "@kjts20/tool": "^0.0.72",
+        "@types/react": "^16.8.3",
+        "react": "^16.8.3",
+        "antd": "^4.24.8",
         "tsup": "^6.4.0",
-        "typescript": "^4.8.4",
-        "@kjts20/tool": "^0.0.71"
+        "typescript": "^4.8.4"
     },
     "prettier": {
         "tabWidth": 4,
@@ -45,7 +46,6 @@
         "dist"
     ],
     "dependencies": {
-        "antd": "^4.24.8",
         "axios": "^1.1.3",
         "file-saver": "^2.0.5",
         "jszip": "^3.10.1"

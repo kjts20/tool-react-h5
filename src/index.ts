@@ -9,9 +9,6 @@ export * from './utils/antdFormUtils';
 // 缓存相关
 export * from './impl/browserStorageImpl';
 
-// 提示与过滤
-export * from './utils/platformUtils';
-
 // 工具部分
 export * from './utils/stringConst';
 export * from './utils/styleUtils';
