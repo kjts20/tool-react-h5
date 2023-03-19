@@ -1,4 +1,4 @@
-import { isObj } from '@kjts20/tool';
+import { generateRandomStr, isObj, isStr } from '@kjts20/tool';
 import { RcFile } from 'antd/lib/upload/interface';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
@@ -144,12 +144,25 @@ export const fileData2TreeNode = function <T extends IFilepath>(fileData: Array<
 };
 
 /**
+ * 下载zip文件子项
+ */
+export interface IDownloadZipFileItem {
+    // 路径字符串
+    paths: string;
+    // 名称
+    name: string;
+    // 扩展名
+    ext: string;
+    content: string;
+}
+/**
  * 下载zip文件
  * @param fileList 文件列表
  * @param zipName zip文件名字
  * @returns
  */
-export const downloadZip = function <T extends IFilepath>(fileList: Array<T>, zipName = 'sskj-generated-sources') {
+export const downloadZip = function <T extends IDownloadZipFileItem>(fileList: Array<T>, downloadName?) {
+    const zipName = isStr(downloadName) ? downloadName : `download-${generateRandomStr(5)}`;
     return new Promise((resolve, reject) => {
         try {
             const zip = new JSZip();

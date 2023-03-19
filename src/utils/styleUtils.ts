@@ -1,4 +1,4 @@
-import { str_empty, str_space } from './string.const';
+import { str_empty, str_space } from './stringConst';
 
 /**
  * 切割为字符串组
