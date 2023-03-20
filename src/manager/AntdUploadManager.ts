@@ -30,6 +30,7 @@ export class AntdUploaderManager {
     }
 
     private init() {
+        const that = this;
         // 添加一个图片上传消费者
         this.manager.addConsumer({
             options: {
@@ -53,7 +54,7 @@ export class AntdUploaderManager {
                         const sendData = { ...(data || {}) };
                         sendData[filename] = file;
                         // 调用上传函数
-                        this.httpServer
+                        that.httpServer
                             .file(target, sendData, {
                                 onUploadProgress: e => {
                                     const { total, loaded } = e;
