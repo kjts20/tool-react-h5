@@ -1,6 +1,6 @@
 {
     "name": "@kjts20/tool-react-h5",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "description": "wkj",
     "miniprogram": "dist",
     "main": "dist/index.js",
