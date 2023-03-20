@@ -18,3 +18,4 @@ export * from './utils/fileUtils';
 
 // 断言部分
 export * from './tools/assert';
+export * from './tools/form';

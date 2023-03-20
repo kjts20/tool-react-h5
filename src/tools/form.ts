@@ -1,0 +1,50 @@
+import { isArr, isObj } from '@kjts20/tool';
+
+/**
+ * 多级转一级
+ * 用法：一般对象转form表单
+ *     {user: {name: "wkj"}, test: {status: true}} =>  {"user.name": "wkj", "test.status": true}
+ * @params obj 一般对象
+ */
+export const toFormData = function (obj) {
+    const goalData = {};
+    function obj2FormData(data, prefix: string[] = []) {
+        if (isObj(data) && !isArr(data)) {
+            for (const key in data) {
+                obj2FormData(data[key], [...prefix, key]);
+            }
+        } else {
+            goalData[prefix.join('.')] = data;
+        }
+    }
+    if (isObj(obj)) {
+        obj2FormData(obj);
+    }
+    return goalData;
+};
+
+/**
+ * 一级转多级
+ * 用法： form表单转对象
+ *     {"user.name": "wkj", "test.status": true} => {user: {name: "wkj"}, test: {status: true}}
+ * @params formData 表单数据
+ */
+export const formData2Obj = function (formData) {
+    const data = {};
+    if (isObj(formData)) {
+        for (const key in formData) {
+            let tmp = data;
+            const ks = (key + '').split('.');
+            for (let i = 0; i < ks.length; ) {
+                const k = ks[i];
+                if (++i === ks.length) {
+                    tmp[k] = formData[key];
+                } else {
+                    !isObj(tmp[k]) && (tmp[k] = {});
+                    tmp = tmp[k];
+                }
+            }
+        }
+    }
+    return data;
+};
