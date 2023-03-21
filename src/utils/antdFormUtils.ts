@@ -106,10 +106,10 @@ export const directoryRule: Rule = function ({ getFieldValue }) {
     return {
         validator(_, val) {
             if (val) {
-                for (const it of (val + '').split('/').filter((it) => it)) {
+                for (const it of (val + '').split('/').filter(it => it)) {
                     if (!fileNameRe.test(it)) {
                         return Promise.reject(new Error('文件夹名称不合法'));
-                    } else if (val.length > 32) {
+                    } else if (val.length > 128) {
                         return Promise.reject(new Error('文件夹名称过长'));
                     }
                 }
