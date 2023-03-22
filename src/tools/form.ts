@@ -1,4 +1,5 @@
 import { isArr, isObj } from '@kjts20/tool';
+import { IKeyVal } from '../types/object';
 
 /**
  * 多级转一级
@@ -30,7 +31,7 @@ export const toFormData = function (obj) {
  * @params formData 表单数据
  */
 export const formData2Obj = function (formData) {
-    const data = {};
+    const data: IKeyVal = {};
     if (isObj(formData)) {
         for (const key in formData) {
             let tmp = data;
