@@ -167,7 +167,8 @@ export const downloadZip = function <T extends IDownloadZipFileItem>(fileList: A
         try {
             const zip = new JSZip();
             fileList.forEach(file => {
-                zip.file([file.paths, file.name].filter(it => it).join(pathSeparator), file.content);
+                const fileName = [file.name, file.ext].filter(it => it).join('.');
+                zip.file([file.paths, fileName].filter(it => it).join(pathSeparator), file.content);
             });
             zip.generateAsync({ type: 'blob' })
                 .then(content => {
