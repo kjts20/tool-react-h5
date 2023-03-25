@@ -199,7 +199,7 @@ export const downloadZip = function <T extends IDownloadZipFileItem>(fileList: A
  */
 export const downloadFile = function (downloadFileName, fileContent) {
     return new Promise((resolve, reject) => {
-        if (isStr(downloadFile)) {
+        if (isStr(downloadFileName)) {
             try {
                 FileSaver.saveAs(fileContent, downloadFileName);
                 resolve({ msg: '下载成功' });
