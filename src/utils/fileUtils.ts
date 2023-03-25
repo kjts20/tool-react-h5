@@ -155,6 +155,7 @@ export interface IDownloadZipFileItem {
     ext: string;
     content: string;
 }
+
 /**
  * 下载zip文件
  * @param fileList 文件列表
@@ -173,9 +174,7 @@ export const downloadZip = function <T extends IDownloadZipFileItem>(fileList: A
             zip.generateAsync({ type: 'blob' })
                 .then(content => {
                     FileSaver.saveAs(content, zipName + '.zip');
-                })
-                .then(res => {
-                    resolve(res);
+                    resolve({ msg: '下载成功' });
                 })
                 .catch(err => {
                     reject({
@@ -187,6 +186,33 @@ export const downloadZip = function <T extends IDownloadZipFileItem>(fileList: A
             reject({
                 msg: err.message || '下载zip失败',
                 err
+            });
+        }
+    });
+};
+
+/**
+ * 下载文件
+ * @param downloadFileName 文件名字
+ * @param fileContent 文件内容
+ * @returns
+ */
+export const downloadFile = function (downloadFileName, fileContent) {
+    return new Promise((resolve, reject) => {
+        if (isStr(downloadFile)) {
+            try {
+                FileSaver.saveAs(fileContent, downloadFileName);
+                resolve({ msg: '下载成功' });
+            } catch (err) {
+                reject({
+                    msg: err.message || '下载zip失败',
+                    err
+                });
+            }
+        } else {
+            reject({
+                msg: '下载文件名字为空',
+                err: { downloadFileName }
             });
         }
     });
