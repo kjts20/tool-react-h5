@@ -2,13 +2,12 @@
  * @Description: 工具类：文件工具
  * @Author: wkj
  * @Date: 2019-11-04 11:20:15
- * @LastEditTime: 2023-04-15 08:49:09
- * @LastEditors: wkj wkj@kjwoo.cn
+ * @LastEditTime: 2023-07-07 22:57:24
+ * @LastEditors: wkj wkj.kjwoo.cn
  */
 import { btoa } from '../lib/base64';
 import pako from 'pako';
 import { generateRandomStr, isObj, isStr } from '@kjts20/tool';
-import { RcFile } from 'antd/lib/upload/interface';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
 
@@ -17,7 +16,7 @@ import JSZip from 'jszip';
  * @param file 上传的文件
  * @returns
  */
-export const readUploadFile = function (file: RcFile) {
+export const readUploadFile = function (file: Blob) {
     return new Promise((resolve: (res: string) => void, reject) => {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -39,7 +38,7 @@ export const readUploadFile = function (file: RcFile) {
  * @param file 上传文件
  * @returns
  */
-export const readUploadJsonFile = function <R = any>(file: RcFile) {
+export const readUploadJsonFile = function <R = any>(file: Blob) {
     return new Promise((resolve: (res: R) => void, reject) => {
         readUploadFile(file)
             .then(res => {
@@ -272,7 +271,6 @@ export const unGzip = function (gzipStr) {
     var data = pako.inflate(binData);
     // strData = String.fromCharCode.apply(null, new Uint16Array(data));
     strData = forCharData(new Uint16Array(data)); //解决栈溢出问题
-
     var dateUrlDecode = decodeURIComponent(decodeURIComponent(strData));
     try {
         return JSON.parse(dateUrlDecode);
