@@ -1,6 +1,6 @@
 {
     "name": "@kjts20/tool-react-h5",
-    "version": "0.0.30",
+    "version": "0.1.0",
     "description": "wkj",
     "miniprogram": "dist",
     "main": "dist/index.js",
@@ -24,7 +24,7 @@
     "author": "wkj",
     "license": "Apache",
     "devDependencies": {
-        "@kjts20/tool": "^0.0.98",
+        "@kjts20/tool": "^0.1.1",
         "@types/node": "^20.4.0",
         "@types/react": "^16.8.3",
         "react": "^16.8.3",

@@ -1,11 +1,9 @@
 /*
+ * @Author: wkj（wkj.kjwoo.cn）
+ * @Date: 2023-07-08 12:07:38
+ * @LastEditTime: 2023-07-08 13:38:54
  * @Description: 工具类：文件工具
- * @Author: wkj
- * @Date: 2019-11-04 11:20:15
- * @LastEditTime: 2023-07-07 22:57:24
- * @LastEditors: wkj wkj.kjwoo.cn
  */
-import { btoa } from '../lib/base64';
 import pako from 'pako';
 import { generateRandomStr, isObj, isStr } from '@kjts20/tool';
 import FileSaver from 'file-saver';
@@ -66,16 +64,19 @@ export interface IFilepath {
     ext: string;
     content: string;
 }
+
 export interface ITreeNode {
     key: string;
     title: string;
     children?: Array<ITreeNode>;
     isLeaf?: boolean;
 }
+
 export interface IFileAndTreeData<T> {
     fileDict: { [key: string]: T };
     treeNode: Array<ITreeNode>;
 }
+
 export const pathSeparator = '/';
 /**
  * 文件内容转树形结构
@@ -231,9 +232,9 @@ export const downloadFile = function (downloadFileName, fileContent) {
  * @param buffer
  * @returns
  */
-export const arrayBufferToBase64Img = function (buffer) {
+export const arrayBufferToBase64Img = function (buffer, imgExtension = 'jpeg') {
     const str = String.fromCharCode(...new Uint8Array(buffer));
-    return `data:image/jpeg;base64,${btoa(str)}`;
+    return `data:image/${imgExtension};base64,${btoa(str)}`;
 };
 
 /**
@@ -269,8 +270,8 @@ export const unGzip = function (gzipStr) {
     });
     var binData = new Uint8Array(charData);
     var data = pako.inflate(binData);
-    // strData = String.fromCharCode.apply(null, new Uint16Array(data));
-    strData = forCharData(new Uint16Array(data)); //解决栈溢出问题
+    //解决栈溢出问题
+    strData = forCharData(new Uint16Array(data));
     var dateUrlDecode = decodeURIComponent(decodeURIComponent(strData));
     try {
         return JSON.parse(dateUrlDecode);
@@ -284,38 +285,9 @@ export const unGzip = function (gzipStr) {
  * @param data
  * @returns
  */
-export const gzip = function (data) {
+export const gzip = function (data: object) {
     var binaryString = pako.gzip(encodeURIComponent(JSON.stringify(data)), { to: 'string' });
     return btoa(binaryString);
-};
-
-/**
- * base64 编码
- * @param data
- * @returns
- */
-export const base64 = function (data) {
-    var b = new Buffer(JSON.stringify(data));
-    return b.toString('base64');
-};
-
-/**
- * base64解码
- * @param base64
- * @returns
- */
-export const unBase64 = function (base64) {
-    try {
-        var b = new Buffer(base64, 'base64');
-    } catch (error) {
-        throw new Error('不是base64字符串！！！');
-    }
-    var decodeData = b.toString();
-    try {
-        return JSON.parse(decodeData);
-    } catch (e) {
-        return decodeData;
-    }
 };
 
 /**
@@ -336,31 +308,6 @@ export const base64ToBlob = function (base64Data) {
         ia[i] = byteString.charCodeAt(i);
     }
     return new Blob([ia], { type: mimeString });
-};
-
-/**
- * 文件下载
- * @param content 字节码文件内容
- * @param fileName 下载名字
- * @return 下载文件的名字
- */
-export const download = function (content: Blob, fileName: string) {
-    let blob = new Blob([content]);
-    //@ts-ignore
-    const ieDownloader = window.navigator.msSaveBlob;
-    if (typeof ieDownloader !== 'undefined') {
-        ieDownloader(blob, fileName);
-    } else {
-        const downloadLink = document.createElement('a');
-        downloadLink.download = fileName;
-        downloadLink.style.display = 'none';
-        downloadLink.href = URL.createObjectURL(blob);
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        URL.revokeObjectURL(downloadLink.href);
-    }
-    return fileName;
 };
 
 /**
