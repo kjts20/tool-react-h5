@@ -1,7 +1,7 @@
 /*
  * @Author: wkj（wkj.kjwoo.cn）
  * @Date: 2023-07-08 13:01:52
- * @LastEditTime: 2023-07-08 13:41:09
+ * @LastEditTime: 2023-07-08 14:28:33
  * @Description: 文件工具
  */
 
@@ -25,7 +25,7 @@ export interface ICsvColumn {
  */
 export const downloadCsv = function (downloadFileName, columnList: Array<ICsvColumn>, dataSource: Array<any> = []) {
     const lineList: Array<string> = [];
-    const toColumnVal = text => ((text === undefined || text === null ? '' : text) + '').replace(/\,/g, '","');
+    const toColumnVal = text => ((text === undefined || text === null ? '' : text) + '').replace(/\,/g, '，');
     // 表头制作
     lineList.push(columnList.map(it => toColumnVal(it.title)).join(strConst.COMMA));
     // 表内容制作
