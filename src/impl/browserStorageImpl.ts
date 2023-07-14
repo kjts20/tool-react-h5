@@ -1,3 +1,9 @@
+/*
+ * @Author: wkj（wkj.kjwoo.cn）
+ * @Date: 2023-05-30 11:21:11
+ * @LastEditTime: 2023-07-14 16:38:06
+ * @Description: 缓存实现类
+ */
 import { ISetStorageOptions, IGetStorageOptions, IRemoveStorageOptions, IClearStorageOptions, IStorageApi, isFunc } from '@kjts20/tool';
 
 // 保存json的key
@@ -90,9 +96,9 @@ const toStorageImpl = function (storage: Storage): IStorageApi {
 /**
  * localStorage实现
  */
-export const localStorageImpl = toStorageImpl(localStorage);
+export const localStorageImpl = toStorageImpl((global => global.localStorage)(this || window || globalThis));
 
 /**
  * sessionStorage实现
  */
-export const sessionStorageImpl = toStorageImpl(sessionStorage);
+export const sessionStorageImpl = toStorageImpl((global => global.sessionStorage)(this || window || globalThis));
