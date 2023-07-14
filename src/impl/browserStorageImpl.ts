@@ -1,7 +1,7 @@
 /*
  * @Author: wkj（wkj.kjwoo.cn）
  * @Date: 2023-05-30 11:21:11
- * @LastEditTime: 2023-07-14 16:38:06
+ * @LastEditTime: 2023-07-14 17:43:12
  * @Description: 缓存实现类
  */
 import { ISetStorageOptions, IGetStorageOptions, IRemoveStorageOptions, IClearStorageOptions, IStorageApi, isFunc } from '@kjts20/tool';
@@ -16,7 +16,7 @@ const saveJsonKey = function (key: number | string) {
  * @param storage 仓库
  * @returns
  */
-const toStorageImpl = function (storage: Storage): IStorageApi {
+export const toStorageImpl = function (storage: Storage): IStorageApi {
     // 获取storage
     const getStorage = function (key) {
         const getVal = k => storage.getItem(k);
